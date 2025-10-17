@@ -6,7 +6,7 @@ import getErrorMessage from "../utils/errorHandler.js";
 const catalogController = Router();
 
 catalogController.get("/", async (req, res) => {
-    res.render("catalog");
+    res.render("catalog/catalog");
 });
 
 catalogController.get("/create", isAuth, (req, res) => {
