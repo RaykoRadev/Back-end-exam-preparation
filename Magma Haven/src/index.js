@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import handlebars from "express-handlebars";
 import mongoose from "mongoose";
 
@@ -17,6 +17,8 @@ try {
 }
 
 app.use(express.static("public"));
+
+app.use(urlencoded());
 
 app.engine(
     "hbs",
