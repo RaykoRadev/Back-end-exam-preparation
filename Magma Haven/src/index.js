@@ -2,6 +2,7 @@ import express from "express";
 import handlebars from "express-handlebars";
 
 import routes from "./routes.js";
+import setTilte from "./utils/pageHelper.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.engine(
             allowProtoMethodsByDefault: true,
             allowProtoPropertiesByDefault: true,
         },
+        helpers: { ...setTilte },
     })
 );
 
