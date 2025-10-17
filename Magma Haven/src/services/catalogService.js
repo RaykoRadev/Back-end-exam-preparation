@@ -16,4 +16,8 @@ export default {
     edit(id, data) {
         return Catalog.findByIdAndUpdate(id, data, { runValidators: true });
     },
+
+    delete(id) {
+        return Catalog.findByIdAndDelete(id);
+    },
 };

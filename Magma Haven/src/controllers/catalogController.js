@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuth, isGuest } from "../middlewares/authentication.js";
+import { isAuth } from "../middlewares/authentication.js";
 import catalogService from "../services/catalogService.js";
 import getErrorMessage from "../utils/errorHandler.js";
 import { isOwner } from "../middlewares/checkOwnership.js";
@@ -75,5 +75,24 @@ catalogController.post("/edit/:volcanoId", isAuth, async (req, res) => {
         });
     }
 });
+
+catalogController.get(
+    "/delete/:volcanoId",
+    isAuth,
+    isOwner,
+    async (req, res) => {
+        const volcanoId = req.params.volcanoId;
+
+        try {
+            const volcano = await catalogService.delete(volcanoId);
+
+            res.redirect("/catalog");
+        } catch (err) {
+            res.render("catalog/catalog", {
+                error: getErrorMessage(err),
+            });
+        }
+    }
+);
 
 export default catalogController;
