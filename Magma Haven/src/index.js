@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import routes from "./routes.js";
 import setTilte from "./utils/pageHelper.js";
+import checkAuth from "./middlewares/authentication.js";
 
 const app = express();
 const url = "mongodb://localhost:27017";
@@ -22,6 +23,8 @@ app.use(express.static("public"));
 app.use(urlencoded());
 
 app.use(cookieParser());
+
+app.use(checkAuth);
 
 app.engine(
     "hbs",
