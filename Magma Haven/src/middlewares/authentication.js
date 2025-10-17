@@ -21,8 +21,22 @@ export default function checkAuth(req, res, next) {
 
         return next();
     } catch (err) {
+        const errorMessage = "Session expired!";
         res.clearCookie("auth");
-        res.redirect("/users/login");
-        return getErrorMessage(err);
+        return res.redirect("/users/login");
     }
+}
+
+export function isAuth(req, res, next) {
+    if (!req.isAuthenticated) {
+        return res.redirect("/users/login");
+    }
+    next();
+}
+
+export function isGuest(req, res, next) {
+    if (req.isAuthenticated) {
+        return res.redirect("/");
+    }
+    next();
 }
