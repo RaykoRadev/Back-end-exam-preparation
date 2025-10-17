@@ -28,6 +28,14 @@ userController.post("/register", async (req, res) => {
     }
 });
 
+userController.get("/login", (req, res) => {
+    res.render("auth/login");
+});
+
+userController.post("/login", (req, res) => {
+    res.render("auth/login");
+});
+
 userController.get("/logout", (req, res) => {
     res.clearCookie("auth");
     res.redirect("/");
