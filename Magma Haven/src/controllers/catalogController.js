@@ -2,6 +2,7 @@ import { Router } from "express";
 import { isAuth, isGuest } from "../middlewares/authentication.js";
 import catalogService from "../services/catalogService.js";
 import getErrorMessage from "../utils/errorHandler.js";
+import { isOwner } from "../middlewares/checkOwnership.js";
 
 const catalogController = Router();
 
@@ -51,10 +52,9 @@ catalogController.get("/details/:volcanoId", async (req, res) => {
     }
 });
 
-catalogController.get("/edit/:volcanoId", isAuth, async (req, res) => {
-    const volcanoId = req.params.volcanoId;
+catalogController.get("/edit/:volcanoId", isAuth, isOwner, async (req, res) => {
     try {
-        const volcano = await catalogService.getOne(volcanoId);
+        const volcano = req.volcano;
         res.render("catalog/edit", { data: volcano });
     } catch (err) {
         res.render("catalog/catalog", {
