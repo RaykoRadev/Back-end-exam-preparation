@@ -32,8 +32,22 @@ userController.get("/login", (req, res) => {
     res.render("auth/login");
 });
 
-userController.post("/login", (req, res) => {
-    res.render("auth/login");
+userController.post("/login", async (req, res) => {
+    const userData = req.body;
+
+    try {
+        const user = await userService.login(userData);
+
+        const token = generateToken(user);
+
+        res.cookie("auth", token);
+        res.redirect("/");
+    } catch (err) {
+        res.render("auth/login", {
+            error: getErrorMessage(err),
+            user: userData,
+        });
+    }
 });
 
 userController.get("/logout", (req, res) => {
