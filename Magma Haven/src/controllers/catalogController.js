@@ -43,8 +43,11 @@ catalogController.get("/details/:volcanoId", async (req, res) => {
     try {
         const volcano = await catalogService.getOne(volcanoId);
         const isOwner = userId == volcano.owner;
+        const isVoted = volcano.voteList.includes(userId);
 
-        res.render("catalog/details", { volcano, isOwner });
+        console.log(isVoted);
+
+        res.render("catalog/details", { volcano, isOwner, isVoted });
     } catch (err) {
         res.render("catalog/catalog", {
             error: getErrorMessage(err),
@@ -94,5 +97,19 @@ catalogController.get(
         }
     }
 );
+
+catalogController.get("/vote/:volcanoId", isAuth, async (req, res) => {
+    const volcanoId = req.params.volcanoId;
+    const userId = req.user?.id;
+    try {
+        const volcano = await catalogService.push(volcanoId, userId);
+
+        res.redirect(`/catalog/details/${volcanoId}`);
+    } catch (err) {
+        res.render("catalog/catalog", {
+            error: getErrorMessage(err),
+        });
+    }
+});
 
 export default catalogController;

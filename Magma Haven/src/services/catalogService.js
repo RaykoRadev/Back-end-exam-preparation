@@ -20,4 +20,10 @@ export default {
     delete(id) {
         return Catalog.findByIdAndDelete(id);
     },
+
+    push(volcanoid, userId) {
+        return Catalog.findByIdAndUpdate(volcanoid, {
+            $push: { voteList: userId },
+        });
+    },
 };
