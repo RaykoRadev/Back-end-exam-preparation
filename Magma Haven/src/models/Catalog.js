@@ -3,12 +3,12 @@ import { Schema, Types, model } from "mongoose";
 const catalogSchema = new Schema({
     name: {
         type: String,
-        requred: [true, "Catalog name is required!"],
+        required: [true, "Catalog name is required!"],
         minLength: [2, "Catalog name has to be at least 2 characters long!"],
     },
     location: {
         type: String,
-        requred: [true, "Catalog location is required!"],
+        required: [true, "Catalog location is required!"],
         minLength: [
             3,
             "Catalog location has to be at least 3 characters long!",
@@ -16,18 +16,18 @@ const catalogSchema = new Schema({
     },
     elevation: {
         type: Number,
-        requred: [true, "Catalog elevation is required!"],
+        required: [true, "Catalog elevation is required!"],
         min: [0, "Catalog elevation has to be positive digit!"],
     },
     lastEruption: {
         type: Number,
-        requred: [true, "Catalog last eruption is required!"],
+        required: [true, "Catalog last eruption is required!"],
         min: [0, "Catalog last eruption has to be betwen 0 and 2025"],
         max: [2025, "Catalog last eruption has to be betwen 0 and 2025"],
     },
     imageUrl: {
         type: String,
-        requred: [true, "Catalog imageUrl is required!"],
+        required: [true, "Catalog imageUrl is required!"],
         match: [
             /^https?:\/\//,
             "Catalog imageUrl has to be start with http://... or https://...!",
@@ -35,6 +35,7 @@ const catalogSchema = new Schema({
     },
     typeVolcano: {
         type: String,
+        required: [true, "Catalog typeVolcano is required!"],
         enum: [
             "Supervolcanoes",
             "Submarine",
