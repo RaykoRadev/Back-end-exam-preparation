@@ -12,4 +12,8 @@ export default {
     getOne(id) {
         return Catalog.findById(id);
     },
+
+    edit(id, data) {
+        return Catalog.findByIdAndUpdate(id, data, { runValidators: true });
+    },
 };

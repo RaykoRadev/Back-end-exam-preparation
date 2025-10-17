@@ -42,7 +42,7 @@ catalogController.get("/details/:volcanoId", async (req, res) => {
     try {
         const volcano = await catalogService.getOne(volcanoId);
         const isOwner = userId == volcano.owner;
-        console.log(isOwner);
+
         res.render("catalog/details", { volcano, isOwner });
     } catch (err) {
         res.render("catalog/catalog", {
@@ -67,7 +67,8 @@ catalogController.post("/edit/:volcanoId", isAuth, async (req, res) => {
     const volcanoId = req.params.volcanoId;
     const data = req.body;
     try {
-        // const volcano = await catalogService.getOne(volcanoId);
+        const volcano = await catalogService.edit(volcanoId, data);
+        res.redirect(`/details/${volcanoId}`);
     } catch (err) {
         res.render("catalog/catalog", {
             error: getErrorMessage(err),
