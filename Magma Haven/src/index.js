@@ -1,6 +1,7 @@
 import express, { urlencoded } from "express";
 import handlebars from "express-handlebars";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 import routes from "./routes.js";
 import setTilte from "./utils/pageHelper.js";
@@ -19,6 +20,8 @@ try {
 app.use(express.static("public"));
 
 app.use(urlencoded());
+
+app.use(cookieParser());
 
 app.engine(
     "hbs",
