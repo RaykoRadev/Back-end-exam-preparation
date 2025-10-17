@@ -25,7 +25,7 @@ const catalogSchema = new Schema({
         min: [0, "Catalog last eruption has to be betwen 0 and 2025"],
         max: [2025, "Catalog last eruption has to be betwen 0 and 2025"],
     },
-    image: {
+    imageUrl: {
         type: String,
         requred: [true, "Catalog imageUrl is required!"],
         match: [
