@@ -1,10 +1,20 @@
 import express from "express";
 import handlebars from "express-handlebars";
+import mongoose from "mongoose";
 
 import routes from "./routes.js";
 import setTilte from "./utils/pageHelper.js";
 
 const app = express();
+const url = "mongodb://localhost:27017";
+
+try {
+    mongoose.connect(url, { dbName: "practising" });
+    console.log("Succssesfully connected to DB");
+} catch (err) {
+    console.log("Can not connect to the DB");
+    console.log(err);
+}
 
 app.use(express.static("public"));
 
