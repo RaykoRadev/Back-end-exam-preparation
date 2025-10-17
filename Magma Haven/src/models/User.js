@@ -20,7 +20,7 @@ const userSchema = new Schema({
 });
 
 userSchema.pre("save", async function () {
-    this.password = bcrypt.hash(this.password, 12);
+    this.password = await bcrypt.hash(this.password, 12);
 });
 
 const User = model("User", userSchema);

@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import userService from "../services/userService.js";
 import getErrorMessage from "../utils/errorHandler.js";
+import generateToken from "../utils/generateToken.js";
 
 const userController = Router();
 
@@ -14,9 +15,12 @@ userController.post("/register", async (req, res) => {
 
     try {
         const user = await userService.register(userData);
+
+        const token = generateToken(user);
+
+        res.cookie("auth", token);
         res.redirect("/");
     } catch (err) {
-        console.log(err);
         res.render("auth/register", {
             error: getErrorMessage(err),
             user: userData,
