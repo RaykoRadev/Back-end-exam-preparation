@@ -1,6 +1,8 @@
 import express from "express";
 import handlebars from "express-handlebars";
 
+import routes from "./routes.js";
+
 const app = express();
 
 app.use(express.static("public"));
@@ -16,12 +18,10 @@ app.engine(
     })
 );
 
-app.set("view engine", handlebars);
+app.set("view engine", "hbs");
 app.set("views", "src/views");
 
-app.get("/", (req, res) => {
-    res.send("it wokrks");
-});
+app.use(routes);
 
 app.listen(
     3000,
