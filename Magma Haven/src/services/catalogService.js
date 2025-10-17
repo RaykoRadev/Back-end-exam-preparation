@@ -8,4 +8,8 @@ export default {
     getAll() {
         return Catalog.find();
     },
+
+    getOne(id) {
+        return Catalog.findById(id);
+    },
 };

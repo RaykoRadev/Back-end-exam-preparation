@@ -37,7 +37,18 @@ catalogController.post("/create", isAuth, async (req, res) => {
 });
 
 catalogController.get("/details/:volcanoId", async (req, res) => {
-    res.render("catalog/details");
+    const volcanoId = req.params.volcanoId;
+    const userId = req.user?.id;
+    try {
+        const volcano = await catalogService.getOne(volcanoId);
+        const isOwner = userId == volcano.owner;
+        console.log(isOwner);
+        res.render("catalog/details", { volcano, isOwner });
+    } catch (err) {
+        res.render("catalog/catalog", {
+            error: getErrorMessage(err),
+        });
+    }
 });
 
 export default catalogController;
