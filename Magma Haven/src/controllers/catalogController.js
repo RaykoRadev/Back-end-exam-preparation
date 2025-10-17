@@ -36,4 +36,8 @@ catalogController.post("/create", isAuth, async (req, res) => {
     }
 });
 
+catalogController.get("/details/:volcanoId", async (req, res) => {
+    res.render("catalog/details");
+});
+
 export default catalogController;
