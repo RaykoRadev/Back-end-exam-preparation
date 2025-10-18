@@ -8,4 +8,8 @@ export default {
     create(data, userId) {
         return Post.create({ ...data, owner: userId });
     },
+
+    getOne(id) {
+        return Post.findOne(id);
+    },
 };

@@ -29,4 +29,16 @@ postController.post("/create", isAuth, async (req, res) => {
     }
 });
 
+postController.get("/details/:postId", async (req, res) => {
+    const postId = req.params.postId;
+    try {
+        const post = await postService.getOne(postId);
+        res.redirect("/creatures");
+    } catch (err) {
+        res.render("posts/details", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
 export default postController;
