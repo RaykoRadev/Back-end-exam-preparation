@@ -24,3 +24,17 @@ export default function isAuthMiddleware(req, res, next) {
         });
     }
 }
+
+export function isAuth(req, res, next) {
+    if (!req.isAuthenticated) {
+        return res.redirect("/users/login");
+    }
+    return next();
+}
+
+export function isGuest(req, res, next) {
+    if (req.isAuthenticated) {
+        return res.redirect("/");
+    }
+    return next();
+}

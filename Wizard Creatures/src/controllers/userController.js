@@ -1,14 +1,15 @@
 import { Router } from "express";
 import getErrorMessage from "../utils/errorhandler.js";
 import userServices from "../services/userServices.js";
+import { isAuth, isGuest } from "../middlewares/isitAuth.js";
 
 const userController = Router();
 
-userController.get("/register", (req, res) => {
+userController.get("/register", isGuest, (req, res) => {
     res.render("auth/register");
 });
 
-userController.post("/register", async (req, res) => {
+userController.post("/register", isGuest, async (req, res) => {
     const userData = req.body;
     try {
         const token = await userServices.register(userData);
@@ -22,11 +23,11 @@ userController.post("/register", async (req, res) => {
     }
 });
 
-userController.get("/login", (req, res) => {
+userController.get("/login", isGuest, (req, res) => {
     res.render("auth/login");
 });
 
-userController.post("/login", async (req, res) => {
+userController.post("/login", isGuest, async (req, res) => {
     const userData = req.body;
     try {
         const token = await userServices.login(userData);
@@ -40,7 +41,7 @@ userController.post("/login", async (req, res) => {
     }
 });
 
-userController.get("/logout", (req, res) => {
+userController.get("/logout", isAuth, (req, res) => {
     res.clearCookie("auth");
     res.redirect("/");
 });
