@@ -34,9 +34,12 @@ postController.get("/details/:postId", async (req, res) => {
     const postId = req.params.postId;
     const userId = req.user?.id;
     try {
-        const { post, isOwner } = await postService.getOne(postId, userId);
+        const { post, isOwner, countVotes } = await postService.getOne(
+            postId,
+            userId
+        );
 
-        res.render("posts/details", { post, isOwner });
+        res.render("posts/details", { post, isOwner, countVotes });
     } catch (err) {
         res.render("posts/details", {
             error: getErrorMessage(err),
@@ -60,6 +63,19 @@ postController.post("/edit/:postId", isAuth, async (req, res) => {
         res.render("posts/edit", {
             error: getErrorMessage(err),
             post: postData,
+        });
+    }
+});
+
+postController.get("/vote/:postId", isAuth, async (req, res) => {
+    const postId = req.params.postId;
+    const userId = req.user?.id;
+    try {
+        await postService.vote(postId, userId);
+        res.redirect(`/creatures/details/${postId}`);
+    } catch (err) {
+        res.render("posts/details", {
+            error: getErrorMessage(err),
         });
     }
 });

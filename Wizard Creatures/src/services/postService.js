@@ -16,11 +16,16 @@ export default {
         });
 
         const isOwner = post.owner.equals(userId);
+        const countVotes = post.votes.length;
 
-        return { post, isOwner };
+        return { post, isOwner, countVotes };
     },
 
     edit(postId, data) {
         return Post.findByIdAndUpdate(postId, data, { runValidators: true });
+    },
+
+    vote(postId, userId) {
+        return Post.findByIdAndUpdate(postId, { $push: { votes: userId } });
     },
 };
