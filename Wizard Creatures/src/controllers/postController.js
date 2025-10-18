@@ -31,9 +31,11 @@ postController.post("/create", isAuth, async (req, res) => {
 
 postController.get("/details/:postId", async (req, res) => {
     const postId = req.params.postId;
+    const userId = req.user?.id;
     try {
-        const post = await postService.getOne(postId);
-        res.redirect("/creatures");
+        const { post, isOwner } = await postService.getOne(postId, userId);
+
+        res.render("posts/details", { post, isOwner });
     } catch (err) {
         res.render("posts/details", {
             error: getErrorMessage(err),

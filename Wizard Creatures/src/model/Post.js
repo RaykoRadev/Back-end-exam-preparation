@@ -30,10 +30,10 @@ const postSchema = new Schema({
     imageUrl: {
         type: String,
         required: [true, "Post's image url is required!"],
-        match: [
-            /^(https?:\/\/).+/,
-            "Post's image url has to start with: http://... or https://...",
-        ],
+        // match: [
+        //     /^(https?:\/\/).+/,
+        //     "Post's image url has to start with: http://... or https://...",
+        // ],
     },
     description: {
         type: String,

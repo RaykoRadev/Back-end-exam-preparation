@@ -9,7 +9,14 @@ export default {
         return Post.create({ ...data, owner: userId });
     },
 
-    getOne(id) {
-        return Post.findOne(id);
+    async getOne(postId, userId) {
+        const post = await Post.findById(postId).populate({
+            path: "owner",
+            select: "firstName lastName",
+        });
+
+        const isOwner = post.owner.equals(userId);
+
+        return { post, isOwner };
     },
 };
