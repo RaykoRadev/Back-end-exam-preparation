@@ -17,7 +17,7 @@ postController.get("/create", isAuth, (req, res) => {
 postController.post("/create", isAuth, async (req, res) => {
     const postData = req.body;
     const userId = req.user.id;
-    console.log(postData);
+
     try {
         const post = await postService.create(postData, userId);
         res.redirect("/creatures");
@@ -39,6 +39,26 @@ postController.get("/details/:postId", async (req, res) => {
     } catch (err) {
         res.render("posts/details", {
             error: getErrorMessage(err),
+        });
+    }
+});
+
+postController.get("/edit/:postId", isAuth, (req, res) => {
+    const post = req.post;
+    res.render("posts/edit", { post });
+});
+
+postController.post("/edit/:postId", isAuth, async (req, res) => {
+    const postData = req.body;
+    const postId = req.params.postId;
+
+    try {
+        const post = await postService.edit(postId, postData);
+        res.redirect("/creatures");
+    } catch (err) {
+        res.render("posts/edit", {
+            error: getErrorMessage(err),
+            post: postData,
         });
     }
 });

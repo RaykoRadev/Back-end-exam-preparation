@@ -19,4 +19,8 @@ export default {
 
         return { post, isOwner };
     },
+
+    edit(postId, data) {
+        return Post.findByIdAndUpdate(postId, data, { runValidators: true });
+    },
 };
