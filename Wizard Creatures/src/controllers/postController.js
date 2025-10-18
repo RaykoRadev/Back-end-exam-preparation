@@ -2,6 +2,7 @@ import { Router } from "express";
 import postService from "../services/postService.js";
 import getErrorMessage from "../utils/errorhandler.js";
 import { isAuth } from "../middlewares/isitAuth.js";
+import { isOwnerF } from "../middlewares/checkOwner.js";
 
 const postController = Router();
 
@@ -43,7 +44,7 @@ postController.get("/details/:postId", async (req, res) => {
     }
 });
 
-postController.get("/edit/:postId", isAuth, (req, res) => {
+postController.get("/edit/:postId", isAuth, isOwnerF, (req, res) => {
     const post = req.post;
     res.render("posts/edit", { post });
 });
@@ -54,7 +55,7 @@ postController.post("/edit/:postId", isAuth, async (req, res) => {
 
     try {
         const post = await postService.edit(postId, postData);
-        res.redirect("/creatures");
+        res.redirect(`/creatures/details/${postId}`);
     } catch (err) {
         res.render("posts/edit", {
             error: getErrorMessage(err),
