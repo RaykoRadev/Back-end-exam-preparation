@@ -1,9 +1,8 @@
 import express from "express";
+import routes from "./routes.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-    res.send("work");
-});
+app.use(routes);
 
 app.listen(3000, console.log("Server is working on http://localhost:3000"));
