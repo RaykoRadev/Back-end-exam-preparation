@@ -45,8 +45,6 @@ catalogController.get("/details/:volcanoId", async (req, res) => {
         const isOwner = userId == volcano.owner;
         const isVoted = volcano.voteList.includes(userId);
 
-        console.log(isVoted);
-
         res.render("catalog/details", { volcano, isOwner, isVoted });
     } catch (err) {
         res.render("catalog/catalog", {
