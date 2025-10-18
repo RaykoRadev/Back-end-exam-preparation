@@ -1,6 +1,7 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import routes from "./routes.js";
+import setTitle from "./utils/dynamicTitle.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.engine(
             allowProtoMethodsByDefault: true,
             allowProtoPropertiesByDefault: true,
         },
+        helpers: { setTitle },
     })
 );
 
