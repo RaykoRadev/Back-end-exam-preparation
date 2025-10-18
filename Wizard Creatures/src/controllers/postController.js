@@ -33,13 +33,19 @@ postController.post("/create", isAuth, async (req, res) => {
 postController.get("/details/:postId", async (req, res) => {
     const postId = req.params.postId;
     const userId = req.user?.id;
-    try {
-        const { post, isOwner, countVotes, voted } = await postService.getOne(
-            postId,
-            userId
-        );
+    const userEmail = req.user.email;
 
-        res.render("posts/details", { post, isOwner, countVotes, voted });
+    try {
+        const { post, isOwner, countVotes, voted, emails } =
+            await postService.getOne(postId, userId, userEmail);
+
+        res.render("posts/details", {
+            post,
+            isOwner,
+            countVotes,
+            voted,
+            emails,
+        });
     } catch (err) {
         res.render("posts/details", {
             error: getErrorMessage(err),

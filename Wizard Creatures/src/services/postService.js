@@ -1,5 +1,5 @@
 import Post from "../model/Post.js";
-import checkVotedF from "../utils/checkVotes.js";
+import extractEmails from "../utils/checkVotes.js";
 
 export default {
     getAll() {
@@ -10,23 +10,20 @@ export default {
         return Post.create({ ...data, owner: userId });
     },
 
-    async getOne(postId, userId) {
-        const post = await Post.findById(postId).populate(
-            {
-                path: "owner",
-                select: "firstName lastName",
-                path: "votes",
-                select: "email ",
-            }
-            // { path: "votes", select: "email" }
-        );
-        console.log(post.votes);
+    async getOne(postId, userId, userEmail) {
+        const post = await Post.findById(postId).populate({
+            path: "owner",
+            select: "firstName lastName",
+            path: "votes",
+            select: "email ",
+        });
+
         const isOwner = post.owner.equals(userId);
         const countVotes = post.votes.length;
-        // const voted = checkVotedF(post.votes, userId);
-        const voted = post.votes.includes({ _id: userId });
+        const emails = extractEmails(post.votes);
+        const voted = emails.includes(userEmail);
 
-        return { post, isOwner, countVotes, voted };
+        return { post, isOwner, countVotes, voted, emails };
     },
 
     edit(postId, data) {
