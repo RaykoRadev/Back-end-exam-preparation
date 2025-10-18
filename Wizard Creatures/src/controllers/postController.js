@@ -34,12 +34,12 @@ postController.get("/details/:postId", async (req, res) => {
     const postId = req.params.postId;
     const userId = req.user?.id;
     try {
-        const { post, isOwner, countVotes } = await postService.getOne(
+        const { post, isOwner, countVotes, voted } = await postService.getOne(
             postId,
             userId
         );
 
-        res.render("posts/details", { post, isOwner, countVotes });
+        res.render("posts/details", { post, isOwner, countVotes, voted });
     } catch (err) {
         res.render("posts/details", {
             error: getErrorMessage(err),
@@ -78,6 +78,13 @@ postController.get("/vote/:postId", isAuth, async (req, res) => {
             error: getErrorMessage(err),
         });
     }
+});
+
+postController.get("/delete/:postId", isAuth, async (req, res) => {
+    const postId = req.params.postId;
+    const userId = req.user?.id;
+    await postService.delete(postId, userId);
+    res.redirect("/creatures");
 });
 
 export default postController;
