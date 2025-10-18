@@ -24,10 +24,10 @@ const userSchema = new Schema({
     },
 });
 
-userSchema.pre("save", async () => {
+userSchema.pre("save", async function () {
     this.password = await bcrypt.hash(this.password, 12);
 });
 
-const User = model("User", userSchema);
+const Auth = model("Auth", userSchema);
 
-export default User;
+export default Auth;
