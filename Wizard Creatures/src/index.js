@@ -15,8 +15,10 @@ app.engine(
     })
 );
 
-app.set("engine view", "hbs");
+app.set("view engine", "hbs");
 app.set("views", "src/views");
+
+app.use(express.static("public"));
 
 app.use(routes);
 
