@@ -2,6 +2,7 @@ import { Router } from "express";
 import getErrorMessage from "../utils/errorhandler.js";
 import userServices from "../services/userServices.js";
 import { isAuth, isGuest } from "../middlewares/isitAuth.js";
+import postService from "../services/postService.js";
 
 const userController = Router();
 
@@ -44,6 +45,13 @@ userController.post("/login", isGuest, async (req, res) => {
 userController.get("/logout", isAuth, (req, res) => {
     res.clearCookie("auth");
     res.redirect("/");
+});
+
+userController.get("/profile", isAuth, async (req, res) => {
+    const filter = { owner: req.user.id };
+    const posts = await postService.getAll(filter);
+
+    res.render("auth/my-posts", { posts });
 });
 
 export default userController;

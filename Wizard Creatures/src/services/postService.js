@@ -2,8 +2,8 @@ import Post from "../model/Post.js";
 import extractEmails from "../utils/checkVotes.js";
 
 export default {
-    getAll() {
-        return Post.find();
+    getAll(filter = {}) {
+        return Post.find(filter);
     },
 
     create(data, userId) {
