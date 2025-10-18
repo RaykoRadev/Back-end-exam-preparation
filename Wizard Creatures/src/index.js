@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 import routes from "./routes.js";
 import setTitle from "./utils/dynamicTitle.js";
+import isAuthMiddleware from "./middlewares/isitAuth.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const url = "mongodb://localhost:27017";
@@ -33,6 +35,8 @@ app.set("views", "src/views");
 
 app.use(express.static("public"));
 app.use(express.urlencoded());
+app.use(cookieParser());
+app.use(isAuthMiddleware);
 
 app.use(routes);
 
