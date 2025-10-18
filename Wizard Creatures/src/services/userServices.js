@@ -1,4 +1,5 @@
 import Auth from "../model/Auth.js";
+import genereteToken from "../utils/generateToken.js";
 
 export default {
     async register(userData) {
@@ -9,6 +10,8 @@ export default {
         if (userData.password !== userData.rePassword) {
             throw new Error("Passwords dont match!");
         }
-        return Auth.create(userData);
+        const newUser = await Auth.create(userData);
+        const token = genereteToken(newUser);
+        return token;
     },
 };
