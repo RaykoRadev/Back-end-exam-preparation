@@ -1,4 +1,4 @@
-import { Schema, Types, model, podel } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const postSchema = new Schema({
     name: {
