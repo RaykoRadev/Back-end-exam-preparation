@@ -8,8 +8,11 @@ export async function create(data, owner) {
     return Animal.create({ ...data, owner });
 }
 
-export async function getOne(anmlId) {
+export async function getOne(anmlId, userId) {
     const animal = await Animal.findById(anmlId);
-    const result = { animal };
+    const ownerId = animal.owner;
+    const isOwner = ownerId.equals(userId);
+
+    const result = { animal, isOwner };
     return result;
 }

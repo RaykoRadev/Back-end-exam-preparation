@@ -37,8 +37,9 @@ animalController.post("/create", isAuth, async (req, res) => {
 
 animalController.get("/details/:anmlId", async (req, res) => {
     const anmlId = req.params.anmlId;
+    const userId = req.user?.id;
     try {
-        const result = await animalService.getOne(anmlId);
+        const result = await animalService.getOne(anmlId, userId);
         res.render("animals/details", result);
     } catch (err) {
         return res.status(404).render("animals/dashboard", {
