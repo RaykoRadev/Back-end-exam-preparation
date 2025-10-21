@@ -1,11 +1,18 @@
 import Animal from "../models/Animal.js";
 
 export async function getAll(filter = {}) {
-    if (filter === 3) {
-        return Animal.find().sort("-1").limit(3);
+    let result = await Animal.find();
+    if (filter.search) {
+        result = result.filter((el) =>
+            el.location.toLowerCase().includes(filter.search.toLowerCase())
+        );
     }
 
-    return Animal.find(filter);
+    return result;
+}
+
+export async function getSorted() {
+    return Animal.find().sort("-1").limit(3);
 }
 
 export async function create(data, owner) {

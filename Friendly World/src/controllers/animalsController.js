@@ -94,4 +94,19 @@ animalController.get("/delete/:animlId", isAuth, async (req, res) => {
     }
 });
 
+animalController.get("/search", (req, res) => {
+    res.render("animals/search");
+});
+
+animalController.post("/search", async (req, res) => {
+    const searched = req.body;
+    try {
+        const animals = await animalService.getAll(searched);
+        res.render("animals/search", { animals });
+    } catch (err) {
+        res.render("animals/search");
+        return { error: getErrorMessage(err) };
+    }
+});
+
 export default animalController;
