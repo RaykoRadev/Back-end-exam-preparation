@@ -36,7 +36,15 @@ animalController.post("/create", isAuth, async (req, res) => {
 });
 
 animalController.get("/details/:anmlId", async (req, res) => {
-    res.render("animals/details");
+    const anmlId = req.params.anmlId;
+    try {
+        const result = await animalService.getOne(anmlId);
+        res.render("animals/details", result);
+    } catch (err) {
+        return res.status(404).render("animals/dashboard", {
+            error: getErrorMessage(err),
+        });
+    }
 });
 
 export default animalController;

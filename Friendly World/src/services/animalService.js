@@ -7,3 +7,9 @@ export async function getAll() {
 export async function create(data, owner) {
     return Animal.create({ ...data, owner });
 }
+
+export async function getOne(anmlId) {
+    const animal = await Animal.findById(anmlId);
+    const result = { animal };
+    return result;
+}
