@@ -1,8 +1,8 @@
 import { Router } from "express";
-import userServices from "../services/userServices.js";
 import { AUTH_COOKIE_NAME } from "../config/constants.js";
 import { isAuth, isGuest } from "../middlewares/authmiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
+import { userService } from "../services/index.js";
 
 const userController = Router();
 
@@ -36,7 +36,7 @@ userController.post("/login", isGuest, async (req, res) => {
     const userData = req.body;
 
     try {
-        const token = await userServices.login(userData);
+        const token = await userService.login(userData);
         res.cookie(AUTH_COOKIE_NAME, token);
         res.redirect("/");
     } catch (err) {
