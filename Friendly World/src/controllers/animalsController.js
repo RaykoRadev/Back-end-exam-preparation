@@ -1,5 +1,7 @@
 import { Router } from "express";
+
 import { animalService } from "../services/index.js";
+import { isAuth } from "../middlewares/authmiddleware.js";
 
 const animalController = Router();
 
@@ -13,6 +15,10 @@ animalController.get("/", async (req, res) => {
             user: userData,
         });
     }
+});
+
+animalController.get("/create", isAuth, (req, res) => {
+    res.render("animals/create");
 });
 
 export default animalController;
