@@ -62,7 +62,7 @@ const animalSchema = new Schema(
         donation: [{ type: Types.ObjectId, ref: "User" }],
         owner: { type: Types.ObjectId, ref: "User" },
     },
-    { timestamp: true }
+    { timestamps: true }
 );
 
 const Animal = model("Animal", animalSchema);

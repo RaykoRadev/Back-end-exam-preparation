@@ -1,7 +1,11 @@
 import Animal from "../models/Animal.js";
 
-export async function getAll() {
-    return Animal.find();
+export async function getAll(filter = {}) {
+    if (filter === 3) {
+        return Animal.find().sort("-1").limit(3);
+    }
+
+    return Animal.find(filter);
 }
 
 export async function create(data, owner) {
