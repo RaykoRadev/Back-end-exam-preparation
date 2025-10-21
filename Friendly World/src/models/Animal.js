@@ -17,7 +17,7 @@ const animalSchema = new Schema({
         required: [true, "Animal's kind is required!"],
         minLength: [3, "Animal's kind must be at least 3 characters long!"],
     },
-    image: {
+    imageUrl: {
         type: String,
         required: [true, "Animal's image url is required!"],
         minLength: [
