@@ -81,4 +81,17 @@ animalController.post("/edit/:animlId", isAuth, async (req, res) => {
     }
 });
 
+animalController.get("/delete/:animlId", isAuth, async (req, res) => {
+    const anmlId = req.params.animlId;
+    const userId = req.user?.id;
+    try {
+        await animalService.deleteOne(anmlId, userId);
+        res.redirect("/animals");
+    } catch (err) {
+        return res.status(404).render("animals/dashboard", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
 export default animalController;

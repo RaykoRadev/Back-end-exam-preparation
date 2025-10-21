@@ -26,6 +26,10 @@ export async function edit(anmlId, data) {
     return Animal.findByIdAndUpdate(anmlId, data, { runValidators: true });
 }
 
+export async function deleteOne(anmlId, userId) {
+    return Animal.deleteOne({ owner: userId, _id: anmlId });
+}
+
 export async function donate(anmlId, userId) {
     return Animal.findByIdAndUpdate(anmlId, { $push: { donation: userId } });
 }
