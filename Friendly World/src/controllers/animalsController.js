@@ -48,4 +48,17 @@ animalController.get("/details/:anmlId", async (req, res) => {
     }
 });
 
+animalController.get("/donate/:anmlId", isAuth, async (req, res) => {
+    const anmlId = req.params.anmlId;
+    const userId = req.user?.id;
+    try {
+        const result = await animalService.donate(anmlId, userId);
+        res.redirect(`/animals/details/${anmlId}`);
+    } catch (err) {
+        return res.status(404).render("animals/dashboard", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
 export default animalController;
