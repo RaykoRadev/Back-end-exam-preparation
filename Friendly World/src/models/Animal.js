@@ -8,9 +8,9 @@ const animalSchema = new Schema({
     },
     years: {
         type: Number,
-        required: [true, "Animal's name is required!"],
-        min: [1, "Animal's name must be at least 1 year old!"],
-        max: [100, "Animal's name must be max 100 years old!"],
+        required: [true, "Animal's year is required!"],
+        min: [1, "Animal's year must be at least 1 year old!"],
+        max: [100, "Animal's year must be max 100 years old!"],
     },
     kind: {
         type: String,
@@ -20,9 +20,9 @@ const animalSchema = new Schema({
     imageUrl: {
         type: String,
         required: [true, "Animal's image url is required!"],
-        minLength: [
-            10,
-            "Animal's image url must be at least 10 characters long!",
+        match: [
+            /^https?:\/\//,
+            "Animal's imageUrl has to be start with http://... or https://...!",
         ],
     },
     need: {
