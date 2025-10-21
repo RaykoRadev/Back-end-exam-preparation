@@ -35,4 +35,8 @@ animalController.post("/create", isAuth, async (req, res) => {
     }
 });
 
+animalController.get("/details/:anmlId", async (req, res) => {
+    res.render("animals/details");
+});
+
 export default animalController;
