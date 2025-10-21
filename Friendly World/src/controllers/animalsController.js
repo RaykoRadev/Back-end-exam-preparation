@@ -3,6 +3,7 @@ import { Router } from "express";
 import { animalService } from "../services/index.js";
 import { isAuth } from "../middlewares/authmiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
+import isOwnerF from "../middlewares/ownersMiddleware.js";
 
 const animalController = Router();
 
@@ -57,6 +58,25 @@ animalController.get("/donate/:anmlId", isAuth, async (req, res) => {
     } catch (err) {
         return res.status(404).render("animals/dashboard", {
             error: getErrorMessage(err),
+        });
+    }
+});
+
+animalController.get("/edit/:animlId", isAuth, isOwnerF, (req, res) => {
+    const animal = req.animal;
+    res.render("animals/edit", { animal });
+});
+
+animalController.post("/edit/:animlId", isAuth, async (req, res) => {
+    const animalData = req.body;
+    const animlId = req.params.animlId;
+    try {
+        const createdAnimal = await animalService.edit(animlId, animalData);
+        res.redirect(`/animals/details/${animlId}`);
+    } catch (err) {
+        return res.status(404).render("animals/edit", {
+            error: getErrorMessage(err),
+            animal: animalData,
         });
     }
 });
