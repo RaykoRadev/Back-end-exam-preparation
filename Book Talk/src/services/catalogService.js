@@ -27,3 +27,7 @@ export async function addWish(reviewId, userId) {
 export async function deleteF(reviewId, userId) {
     return Catalog.deleteOne({ owner: userId, _id: reviewId });
 }
+
+export async function edit(data, reviewId) {
+    return Catalog.findByIdAndUpdate(reviewId, data, { runValidators: true });
+}

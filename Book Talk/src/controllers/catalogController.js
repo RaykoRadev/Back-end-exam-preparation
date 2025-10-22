@@ -2,6 +2,7 @@ import { Router } from "express";
 import { catalogService } from "../services/index.js";
 import { isAuth } from "../middlewares/authmiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
+import isOwnerF from "../utils/checkOwnership.js";
 
 const catalogController = Router();
 
@@ -73,6 +74,26 @@ catalogController.get("/delete/:reviewId", isAuth, async (req, res) => {
     } catch (err) {
         return res.status(404).render("catalog/catalog", {
             error: getErrorMessage(err),
+        });
+    }
+});
+
+catalogController.get("/edit/:reviewId", isAuth, isOwnerF, async (req, res) => {
+    const review = req.review;
+    res.render("catalog/edit", { catalog: review });
+});
+
+catalogController.post("/edit/:reviewId", isAuth, async (req, res) => {
+    const data = req.body;
+    const reviewId = req.params.reviewId;
+
+    try {
+        const updated = await catalogService.edit(data, reviewId);
+        res.redirect(`catalog/edit/${reviewId}`);
+    } catch (err) {
+        return res.status(404).render("catalog/edit", {
+            error: getErrorMessage(err),
+            catalog: data,
         });
     }
 });
