@@ -2,7 +2,7 @@ import { Router } from "express";
 import { AUTH_COOKIE_NAME } from "../config/constants.js";
 import { isAuth, isGuest } from "../middlewares/authmiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
-import { userService } from "../services/index.js";
+import { catalogService, userService } from "../services/index.js";
 
 const userController = Router();
 
@@ -47,6 +47,11 @@ userController.post("/login", isGuest, async (req, res) => {
 userController.get("/logout", isAuth, (req, res) => {
     res.clearCookie(AUTH_COOKIE_NAME);
     res.redirect("/");
+});
+
+userController.get("/profile", isAuth, async (req, res) => {
+    const reviews = await catalogService.getAll({ id: req.user.id });
+    res.render("user/profile", { reviews });
 });
 
 export default userController;

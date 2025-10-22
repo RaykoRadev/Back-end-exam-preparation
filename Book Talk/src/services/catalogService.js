@@ -4,8 +4,14 @@ export async function create(data, userId) {
     return Catalog.create({ ...data, owner: userId });
 }
 
-export async function getAll() {
-    return Catalog.find();
+export async function getAll(filter = {}) {
+    let result = await Catalog.find();
+
+    if (filter.id) {
+        result = result.filter((el) => el.wishingList.includes(filter.id));
+    }
+
+    return result;
 }
 
 export async function getOne(reviewId, userId) {
