@@ -3,30 +3,28 @@ import bcrypt from "bcrypt";
 
 import { generateAuthToken } from "../utils/userUtils.js";
 
-export default {
-    async register(userData) {
-        if (userData.password !== userData.rePassword) {
-            throw new Error("Password missmatch!");
-        }
+export async function register(userData) {
+    if (userData.password !== userData.rePassword) {
+        throw new Error("Password missmatch!");
+    }
 
-        const user = await User.create(userData);
-        const token = generateAuthToken(user);
-        return token;
-    },
+    const user = await User.create(userData);
+    const token = generateAuthToken(user);
+    return token;
+}
 
-    async login(userData) {
-        const user = await User.findOne({ email: userData.email });
+export async function login(userData) {
+    const user = await User.findOne({ email: userData.email });
 
-        if (!user) {
-            throw new Error("Invalid email or password!");
-        }
+    if (!user) {
+        throw new Error("Invalid email or password!");
+    }
 
-        const isMatch = await bcrypt.compare(userData.password, user.password);
-        if (!isMatch) {
-            throw new Error("Invalid email or password!");
-        }
+    const isMatch = await bcrypt.compare(userData.password, user.password);
+    if (!isMatch) {
+        throw new Error("Invalid email or password!");
+    }
 
-        const token = generateAuthToken(user);
-        return token;
-    },
-};
+    const token = generateAuthToken(user);
+    return token;
+}
