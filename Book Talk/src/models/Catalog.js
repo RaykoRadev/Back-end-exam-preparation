@@ -42,6 +42,6 @@ const catalogSchema = new Schema({
     owner: { type: Types.ObjectId, ref: "User" },
 });
 
-const Catalog = model("Catalog", catalogSchema);
+const Catalog = model("Catalog1", catalogSchema);
 
 export default Catalog;
