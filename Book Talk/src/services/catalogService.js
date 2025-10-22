@@ -23,3 +23,7 @@ export async function addWish(reviewId, userId) {
         $push: { wishingList: userId },
     });
 }
+
+export async function deleteF(reviewId, userId) {
+    return Catalog.deleteOne({ owner: userId, _id: reviewId });
+}

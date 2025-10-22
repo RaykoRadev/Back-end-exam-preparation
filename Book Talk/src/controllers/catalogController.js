@@ -63,4 +63,18 @@ catalogController.get("/wish/:reviewId", isAuth, async (req, res) => {
     }
 });
 
+catalogController.get("/delete/:reviewId", isAuth, async (req, res) => {
+    const reviewId = req.params.reviewId;
+    const userId = req.user?.id;
+
+    try {
+        await catalogService.deleteF(reviewId, userId);
+        res.redirect("/catalog");
+    } catch (err) {
+        return res.status(404).render("catalog/catalog", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
 export default catalogController;
