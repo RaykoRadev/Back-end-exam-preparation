@@ -36,12 +36,26 @@ catalogController.post("/create", isAuth, async (req, res) => {
 });
 
 catalogController.get("/details/:reviewId", async (req, res) => {
-    const data = req.body;
+    const reviewId = req.params.reviewId;
     const userId = req.user?.id;
 
     try {
-        const result = await catalogService;
-        res.render("catalog/details", { resultat: result });
+        const data = await catalogService.getOne(reviewId, userId);
+        res.render("catalog/details", { data });
+    } catch (err) {
+        return res.status(404).render("catalog/catalog", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
+catalogController.get("/wish/:reviewId", isAuth, async (req, res) => {
+    const reviewId = req.params.reviewId;
+    const userId = req.user?.id;
+
+    try {
+        await catalogService.addWish(reviewId, userId);
+        res.redirect(`/catalog/details/${reviewId}`);
     } catch (err) {
         return res.status(404).render("catalog/catalog", {
             error: getErrorMessage(err),
