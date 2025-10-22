@@ -1,0 +1,42 @@
+import express from "express";
+import handlebars from "express-handlebars";
+
+import routes from "./routes.js";
+import initDatabase from "./config/dbConfing.js";
+import cookieParser from "cookie-parser";
+import { authMiddleware } from "./middlewares/authmiddleware.js";
+
+const app = express();
+
+initDatabase();
+
+app.use(express.static("public"));
+
+app.use(cookieParser());
+
+app.use(express.urlencoded());
+
+app.engine(
+    "hbs",
+    handlebars.engine({
+        extname: "hbs",
+        runtimeOptions: {
+            allowProtoMethodsByDefault: true,
+            allowProtoPropertiesByDefault: true,
+        },
+        helpers: {
+            setTitle(title) {
+                this.pageTitle = title;
+            },
+        },
+    })
+);
+
+app.set("view engine", "hbs");
+app.set("views", "src/views");
+
+app.use(authMiddleware);
+
+app.use(routes);
+
+app.listen(3000, console.log("Server is listening on port 3000..."));
