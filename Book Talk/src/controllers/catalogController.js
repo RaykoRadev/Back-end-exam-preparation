@@ -35,4 +35,18 @@ catalogController.post("/create", isAuth, async (req, res) => {
     }
 });
 
+catalogController.get("/details/:reviewId", async (req, res) => {
+    const data = req.body;
+    const userId = req.user?.id;
+
+    try {
+        const result = await catalogService;
+        res.render("catalog/details", { resultat: result });
+    } catch (err) {
+        return res.status(404).render("catalog/catalog", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
 export default catalogController;
