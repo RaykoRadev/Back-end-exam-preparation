@@ -5,8 +5,9 @@ import { auctionService } from "../services/index.js";
 
 const brouseController = Router();
 
-brouseController.get("/", (req, res) => {
-    res.render("auctions/browse");
+brouseController.get("/", async (req, res) => {
+    const data = await auctionService.getAll();
+    res.render("auctions/browse", { data });
 });
 
 brouseController.get("/publish", isAuth, (req, res) => {
