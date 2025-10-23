@@ -28,4 +28,8 @@ brouseController.post("/publish", isAuth, async (req, res) => {
     }
 });
 
+brouseController.get("/details/:auctId", async (req, res) => {
+    res.render("auctions/details");
+});
+
 export default brouseController;
