@@ -1,47 +1,31 @@
 {{setTitle 'Home Page'}}
 
-<div class="container">
-    <div class="course-message">
-        <h1 id="site-title">Course Book</h1>
-        <h2 id="site-mid-title">Show your opportunities!</h2>
+<!-- Home Page -->
+<section id="catalog-section">
+    <h1 class="item">Home</h1>
+
+    <div class="item">
+        <div class="layout left med">
+            <div class="col">
+                <img src="/assets/splash.jpg" class="img-med" />
+            </div>
+
+            <div class="content pad-med">
+                <p>Welcome to the online Auction House.</p>
+                <p>
+                    Buy and sell items in categories Real Estate, Vehicles,
+                    Furniture, Electronics and Others. Browse available items
+                    and place your bid. Create a new listing and collect the
+                    highest offer.
+                </p>
+
+                <div class="align-center">
+                    <a class="action" href="/offers">Browse Listings</a>
+                    {{#if isAuthenticated}}
+                    <a class="action" href="#">Publish Auction</a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="last-course">
-        <div class="info">
-            <h2 class="title">Spanish 1-4: Beginner, Elementary, Intermediate and Advanced</h2>
-            <h4 class="genre">Type: Language</h4>
-            <h4 class="certificate">Certificate: Yes</h4>
-            <h4 class="price">Price: €15</h4>
-            <div class="learn-more">
-                <a href="#">Learn More...</a>
-            </div>
-        </div>
-
-        <div class="info">
-            <h2 class="title">Classroom Management Essentials</h2>
-            <h4 class="genre">Type: Management</h4>
-            <h4 class="certificate">Certificate: Yes</h4>
-            <h4 class="price">Price: €25</h4>
-            <div class="learn-more">
-                <a href="#">Learn More...</a>
-            </div>
-        </div>
-
-        <div class="info">
-            <h2 class="title">Art History Prehistory to the Renaissance</h2>
-            <h4 class="genre">Type: Art History</h4>
-            <h4 class="certificate">Certificate: Yes</h4>
-            <h4 class="price">Price: €17</h4>
-            <div class="learn-more">
-                <a href="#">Learn More...</a>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- If there are still no course posts on the database -->
-    <!-- <article class="not-available-course">
-                    <h1>No course created yet.</h1>
-                </article> -->
-</div>
+</section>

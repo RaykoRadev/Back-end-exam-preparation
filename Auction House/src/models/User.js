@@ -3,6 +3,11 @@ import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
     {
+        email: {
+            type: String,
+            required: [true, "Email is required!"],
+            minLength: [10, "Email must be at least 10 characters long!"],
+        },
         firstName: {
             type: String,
             required: [true, "First name is required!"],
@@ -12,11 +17,6 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Last name is required!"],
             minLength: [1, "Last name must be at least 1 characters long!"],
-        },
-        email: {
-            type: String,
-            required: [true, "Email is required!"],
-            minLength: [10, "Email must be at least 10 characters long!"],
         },
         password: {
             type: String,

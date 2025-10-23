@@ -1,13 +1,22 @@
 {{setTitle 'Login Page'}}
 
-<div class="login-box">
-    <h1>Login</h1>
-    <form method="post">
-        <label>Email</label>
-        <input type="text" placeholder="Email.." name="email" , value="{{user.email}}">
-        <label>Password</label>
-        <input type="password" placeholder="Password.." name="password">
-        <input type="submit" value="Submit">
-    </form>
-    <p>Not have an account? <a href="/users/login">Register here</a></p>
-</div>
+<section id="login-section" class="narrow">
+    <h1 class="item">Login</h1>
+
+    <div class="item padded align-center">
+        <form class="aligned" method="post">
+            <label>
+                <span>Email</span>
+                <input type="text" name="email" value="{{user.email}}" />
+            </label>
+            <label>
+                <span>Password</span>
+                <input type="password" name="password" />
+            </label>
+
+            <div class="align-center">
+                <input class="action" type="submit" value="Sign In" />
+            </div>
+        </form>
+    </div>
+</section>
