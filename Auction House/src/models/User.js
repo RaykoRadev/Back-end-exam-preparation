@@ -1,13 +1,17 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 
-//todo adjusting Schema acording current task and the validations too
 const userSchema = new Schema(
     {
-        username: {
+        firstName: {
             type: String,
-            required: [true, "Username is required!"],
-            minLength: [2, "Username must be at least 2 characters long!"],
+            required: [true, "First name is required!"],
+            minLength: [1, "First name must be at least 1 characters long!"],
+        },
+        lastName: {
+            type: String,
+            required: [true, "Last name is required!"],
+            minLength: [1, "Last name must be at least 1 characters long!"],
         },
         email: {
             type: String,
@@ -17,7 +21,7 @@ const userSchema = new Schema(
         password: {
             type: String,
             required: [true, "Password is required!"],
-            minLength: [4, "Password must be at least 4 characters long!"],
+            minLength: [5, "Password must be at least 5 characters long!"],
         },
     },
     { timestamp: true } //todo in the others models
