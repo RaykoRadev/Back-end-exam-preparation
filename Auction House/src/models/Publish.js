@@ -43,10 +43,7 @@ const publishSchema = new Schema(
             ref: "User",
             required: ["Author is required!"],
         },
-        bidder: {
-            type: Types.ObjectId,
-            ref: "User",
-        },
+        bidder: Array,
     },
     { timestamps: true }
 );

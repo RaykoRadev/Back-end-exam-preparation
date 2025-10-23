@@ -7,3 +7,20 @@ export function getAll() {
 export function create(data, userId) {
     return Publish.create({ ...data, author: userId });
 }
+
+export async function getOne(auctId, userId, bid = null) {
+    const item = await Publish.findById(auctId).populate("bidder");
+
+    const isOwner = item.author.equals(userId);
+    const isBided = item.bidder[0] === userId;
+    const name = item.bidder[2];
+    const result = { item, isOwner, isBided, name };
+    return result;
+}
+
+export async function updateBid(auctId, bid, userId, username) {
+    return Publish.findByIdAndUpdate(auctId, {
+        bidder: [userId, bid, username],
+        price: bid,
+    });
+}

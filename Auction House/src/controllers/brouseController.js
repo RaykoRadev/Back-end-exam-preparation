@@ -19,7 +19,7 @@ brouseController.post("/publish", isAuth, async (req, res) => {
     const userId = req.user.id;
     try {
         const offer = await auctionService.create(auctionData, userId);
-        res.render("auctions/browse");
+        res.redirect("/offers");
     } catch (err) {
         res.render("auctions/publish", {
             error: getErrorMessage(err),
@@ -29,7 +29,40 @@ brouseController.post("/publish", isAuth, async (req, res) => {
 });
 
 brouseController.get("/details/:auctId", async (req, res) => {
-    res.render("auctions/details");
+    const userId = req.user?.id;
+    const auctId = req.params.auctId;
+
+    const data = await auctionService.getOne(auctId, userId);
+
+    res.render("auctions/details", { data });
+});
+
+brouseController.post("/details/:auctId", async (req, res) => {
+    const userId = req.user?.id;
+    const auctId = req.params.auctId;
+    const bid = req.body.bid;
+
+    try {
+        const { item } = await auctionService.getOne(auctId, userId);
+        if (bid) {
+            // if (isOwner) {
+            //     throw new Error("The owner can not bid!");
+            // }
+
+            if (Number(bid) <= item.price) {
+                res.locals.error = "The bid must be higher than the price!";
+            } else {
+                const username = `${req.user.firstName} ${req.user.lastName}`;
+                await auctionService.updateBid(auctId, bid, userId, username);
+            }
+        }
+
+        // const data = await auctionService.getOne(auctId, userId, bid);
+        res.redirect(`/offers/details/${auctId}`);
+    } catch (err) {
+        (res.locals.error = getErrorMessage(err)),
+            res.redirect(`/offers/details/${auctId}`);
+    }
 });
 
 export default brouseController;
