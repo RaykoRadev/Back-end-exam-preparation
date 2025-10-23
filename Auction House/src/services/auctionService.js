@@ -25,6 +25,10 @@ export async function updateBid(auctId, bid, userId, username) {
     });
 }
 
-export async function edit(auctId, data) {
+export function edit(auctId, data) {
     return Publish.findByIdAndUpdate(auctId, data, { runValidators: true });
+}
+
+export function deleteF(auctId, userId) {
+    return Publish.deleteOne({ _id: auctId, author: userId });
 }
