@@ -24,7 +24,7 @@ const userSchema = new Schema(
             minLength: [5, "Password must be at least 5 characters long!"],
         },
     },
-    { timestamp: true } //todo in the others models
+    { timestamp: true }
 );
 
 userSchema.pre("save", async function () {
