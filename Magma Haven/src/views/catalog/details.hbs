@@ -13,7 +13,7 @@
             <p id="type">Volcano Type: {{volcano.typeVolcano}}</p>
             <p id="elevation"><span>Elevation: {{volcano.elevation}}m</span></p>
             <p id="last-eruption">Year of Last Eruption: {{volcano.lastEruption}}</p>
-            <p id="votes">Vote's Count: 2</p>
+            <p id="votes">Vote's Count: {{count volcano.voteList}}</p>
             <p id="description">{{volcano.description}}</p>
         </div>
         {{#if isAuthenticated}}
