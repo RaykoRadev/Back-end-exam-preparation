@@ -44,6 +44,7 @@ const publishSchema = new Schema(
             required: ["Author is required!"],
         },
         bidder: Array,
+        isClosed: Boolean,
     },
     { timestamps: true }
 );

@@ -1,11 +1,11 @@
 import Publish from "../models/Publish.js";
 
 export function getAll() {
-    return Publish.find();
+    return Publish.find({ isClosed: false });
 }
 
 export function create(data, userId) {
-    return Publish.create({ ...data, author: userId });
+    return Publish.create({ ...data, author: userId, isClosed: false });
 }
 
 export async function getOne(auctId, userId, bid = null) {
@@ -31,4 +31,12 @@ export function edit(auctId, data) {
 
 export function deleteF(auctId, userId) {
     return Publish.deleteOne({ _id: auctId, author: userId });
+}
+
+export function close(auctId) {
+    return Publish.findByIdAndUpdate(auctId, { isClosed: true });
+}
+
+export function getClosed(userId) {
+    return Publish.find({ isClosed: true, author: userId });
 }

@@ -103,4 +103,28 @@ brouseController.post("/edit/:auctId", isAuth, async (req, res) => {
         });
     }
 });
+
+brouseController.get("/delete/:auctId", isAuth, async (req, res) => {
+    const userId = req.user?.id;
+    const auctId = req.params.auctId;
+
+    await auctionService.deleteF(auctId, userId);
+    res.redirect("/offers");
+});
+
+brouseController.get("/closed/:auctId", isAuth, async (req, res) => {
+    const userId = req.user?.id;
+    const auctId = req.params.auctId;
+
+    await auctionService.close(auctId);
+
+    res.redirect("/offers/closed");
+});
+
+brouseController.get("/closed", isAuth, async (req, res) => {
+    const userId = req.user.id;
+    const data = await auctionService.getClosed(userId);
+    res.render("auctions/closed-auctions", { data });
+});
+
 export default brouseController;
