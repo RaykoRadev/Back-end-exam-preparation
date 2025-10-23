@@ -65,4 +65,42 @@ brouseController.post("/details/:auctId", async (req, res) => {
     }
 });
 
+brouseController.get("/edit/:auctId", isAuth, async (req, res) => {
+    const userId = req.user?.id;
+    const auctId = req.params.auctId;
+
+    try {
+        const { item } = await auctionService.getOne(auctId);
+        if (!item.author.equals(userId)) {
+            return res.redirect("/offers");
+        }
+
+        let isBided = false;
+        if (item.bidder.length > 0) {
+            isBided = true;
+        }
+
+        res.render("auctions/edit", { data: item, isBided });
+    } catch (err) {
+        res.render("auctions/edit", {
+            error: getErrorMessage(err),
+        });
+    }
+});
+
+brouseController.post("/edit/:auctId", isAuth, async (req, res) => {
+    const userId = req.user?.id;
+    const auctId = req.params.auctId;
+    const auctionData = req.body;
+
+    try {
+        await auctionService.edit(auctId, auctionData);
+        res.redirect(`/offers/details/${auctId}`);
+    } catch (err) {
+        res.render("auctions/edit", {
+            error: getErrorMessage(err),
+            data: auctionData,
+        });
+    }
+});
 export default brouseController;

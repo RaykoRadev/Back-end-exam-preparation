@@ -6,9 +6,20 @@
     <h1 class="item">New Auction</h1>
 
     {{>form}}
-    <div class="align-center">
-        <input class="action" type="submit" value="Publish Item">
+
+    <label>
+        <span>Starting price</span>
+        <input type="number" name="price" value="{{data.price}}"></label>
     </div>
+
+    <div class="content pad-med align-center vertical">
+        <label>
+            <span>Description</span>
+            <textarea name="description">{{data.description}}</textarea>
+        </label>
+        <div class="align-center">
+            <input class="action" type="submit" value="Publish Item">
+        </div>
     </div>
 
     </form>

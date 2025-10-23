@@ -7,8 +7,8 @@
         {{data.title}}
         {{#if data.isOwner}}
         <div class="f-right">
-            <a class="action pad-small f-left" href="#">Edit</a>
-            <a class="action pad-small f-left" href="#">Delete</a>
+            <a class="action pad-small f-left" href="/offers/edit/{{data.item.id}}">Edit</a>
+            <a class="action pad-small f-left" href="/offers/delete/{{data.item.id}}">Delete</a>
         </div>
         {{/if}}
     </h1>

@@ -24,3 +24,7 @@ export async function updateBid(auctId, bid, userId, username) {
         price: bid,
     });
 }
+
+export async function edit(auctId, data) {
+    return Publish.findByIdAndUpdate(auctId, data, { runValidators: true });
+}
