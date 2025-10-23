@@ -22,16 +22,17 @@ const publishSchema = new Schema(
             required: [true, "Auction's category is required!"],
             enum: {
                 values: [
-                    "Vehicles",
-                    "Real Estate",
-                    "Electronics",
-                    "Furniture",
-                    "Other",
+                    "vehicles",
+                    "estate",
+                    "electronics",
+                    "furniture",
+                    "other",
                 ],
                 message:
                     "Auction's category must be one from Vehicles, Real Estate, Electronics, Furniture, Other!",
             },
         },
+        imageUrl: String,
         price: {
             type: Number,
             required: [true, "Auction's price is required!"],

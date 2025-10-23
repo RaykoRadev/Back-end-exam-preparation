@@ -7,15 +7,15 @@
 
     <div class="item padded align-center">
 
-        <form class="layout left large" method="" action="">
+        <form class="layout left large" method="post">
 
             <div class="col aligned">
                 <label>
                     <span>Title</span>
-                    <input type="text" name=""></label>
+                    <input type="text" name="title" value="{{data.title}}"></label>
                 <label>
                     <span>Category</span>
-                    <select name="">
+                    <select name="category">
                         <option value="estate">Real Estate</option>
                         <option value="vehicles">Vehicles</option>
                         <option value="furniture">Furniture</option>
@@ -25,16 +25,16 @@
                 </label>
                 <label>
                     <span>Image URL</span>
-                    <input type="text" name=""></label>
+                    <input type="text" name="imageUrl" value="{{data.imageUrl}}"></label>
                 <label>
                     <span>Starting price</span>
-                    <input type="number" name=""></label>
+                    <input type="number" name="price" value="{{data.price}}"></label>
             </div>
 
             <div class="content pad-med align-center vertical">
                 <label>
                     <span>Description</span>
-                    <textarea name=""></textarea>
+                    <textarea name="description">{{data.description}}</textarea>
                 </label>
 
                 <div class="align-center">
