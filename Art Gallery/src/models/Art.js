@@ -5,22 +5,22 @@ const artSchema = new Schema(
         title: {
             type: String,
             required: [true, "Art's  title is required!"],
-            minLength: [2, "Art's title must be at least 2 characters long!"],
+            minLength: [6, "Art's title must be at least 6 characters long!"],
         },
         technique: {
             type: String,
             required: [true, "Art's  technique is required!"],
-            minLength: [
-                2,
-                "Art's technique must be at least 2 characters long!",
+            maxLength: [
+                15,
+                "Art's technique must be maximum 15 characters long!",
             ],
         },
         imageUrl: {
             type: String,
             required: [true, "Art's  image url is required!"],
-            minLength: [
-                2,
-                "Art's image url must be at least 2 characters long!",
+            match: [
+                /^https?:\/\//,
+                "Art's imageUrl has to be start with http://... or https://...!",
             ],
         },
         certificate: {
