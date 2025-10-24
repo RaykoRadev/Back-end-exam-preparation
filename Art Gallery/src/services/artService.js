@@ -21,3 +21,7 @@ export async function getOne(artId, userId) {
 export function share(artId, userId) {
     return Art.findByIdAndUpdate(artId, { $push: { shared: userId } });
 }
+
+export function edit(artId, data) {
+    return Art.findByIdAndUpdate(artId, data, { runValidators: true });
+}

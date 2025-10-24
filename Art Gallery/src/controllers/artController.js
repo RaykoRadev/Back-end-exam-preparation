@@ -41,4 +41,31 @@ artController.get("/share/:artId", isAuth, async (req, res) => {
     res.redirect("/");
 });
 
+artController.get("/edit/:artId", isAuth, async (req, res) => {
+    const artId = req.params.artId;
+    const userId = req.user.id;
+
+    const { art, isAuthor } = await artService.getOne(artId, userId);
+
+    if (!isAuthor) {
+        throw {
+            statusCode: 401,
+            message: "Only the author can edit!",
+        };
+    }
+    res.render("art/edit", { art });
+});
+
+artController.post("/edit/:artId", isAuth, async (req, res) => {
+    const artId = req.params.artId;
+    const art = req.body;
+
+    try {
+        await artService.edit(artId, art);
+        res.redirect(`/art/details/${artId}`);
+    } catch (err) {
+        res.render("art/edit", { art, error: getErrorMessage(err) });
+    }
+});
+
 export default artController;
