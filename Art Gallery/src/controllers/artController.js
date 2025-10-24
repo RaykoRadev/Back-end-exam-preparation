@@ -33,4 +33,12 @@ artController.get("/details/:artId", async (req, res) => {
     res.render("art/details", { result });
 });
 
+artController.get("/share/:artId", isAuth, async (req, res) => {
+    const artId = req.params.artId;
+    const userId = req.user.id;
+
+    await artService.share(artId, userId);
+    res.redirect("/");
+});
+
 export default artController;

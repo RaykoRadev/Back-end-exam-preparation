@@ -12,6 +12,12 @@ export async function getOne(artId, userId) {
     const art = await Art.findById(artId).populate("author");
     const isAuthor = art.author.equals(userId);
 
-    const result = { art, isAuthor };
+    const isSharedByUser = art.shared.some((el) => el.equals(userId));
+
+    const result = { art, isAuthor, isSharedByUser };
     return result;
+}
+
+export function share(artId, userId) {
+    return Art.findByIdAndUpdate(artId, { $push: { shared: userId } });
 }
