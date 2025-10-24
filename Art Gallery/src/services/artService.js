@@ -35,3 +35,11 @@ export async function deleteF(artId, userId) {
 
     return Art.findByIdAndDelete(artId);
 }
+
+export function getOwnedArt(filter) {
+    return Art.find(filter);
+}
+
+export function getSharedArt(userId) {
+    return Art.find().in("shared", userId);
+}

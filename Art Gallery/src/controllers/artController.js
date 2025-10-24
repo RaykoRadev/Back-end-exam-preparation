@@ -19,7 +19,7 @@ artController.post("/create", isAuth, async (req, res) => {
     const userId = req.user.id;
     try {
         await artService.create(art, userId);
-        res.render("art/gallery");
+        res.redirect("/art");
     } catch (err) {
         res.render("art/create", { art, error: getErrorMessage(err) });
     }

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { AUTH_COOKIE_NAME } from "../config/constants.js";
 import { isAuth, isGuest } from "../middlewares/authmiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
-import { userService } from "../services/index.js";
+import { artService, userService } from "../services/index.js";
 
 const userController = Router();
 
@@ -47,6 +47,17 @@ userController.post("/login", isGuest, async (req, res) => {
 userController.get("/logout", isAuth, (req, res) => {
     res.clearCookie(AUTH_COOKIE_NAME);
     res.redirect("/");
+});
+
+userController.get("/profile", isAuth, async (req, res) => {
+    const userId = req.user.id;
+    const ownsArts = await artService.getOwnedArt({ author: userId });
+    const sharedArts = await artService.getSharedArt(userId);
+
+    const ownedtitles = ownsArts.map((el) => el.title).join(", ");
+    const sharedTitles = sharedArts.map((el) => el.title).join(", ");
+
+    res.render("user/profile", { owned: ownedtitles, shared: sharedTitles });
 });
 
 export default userController;
