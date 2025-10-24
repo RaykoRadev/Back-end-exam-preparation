@@ -25,4 +25,12 @@ artController.post("/create", isAuth, async (req, res) => {
     }
 });
 
+artController.get("/details/:artId", async (req, res) => {
+    const artId = req.params.artId;
+    const userId = req.user.id;
+
+    const result = await artService.getOne(artId, userId);
+    res.render("art/details", { result });
+});
+
 export default artController;
