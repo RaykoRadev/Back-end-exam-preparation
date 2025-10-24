@@ -27,8 +27,8 @@ const artSchema = new Schema(
             type: String,
             required: [true, "Art's  certificate is required!"],
             enum: {
-                value: ["Yes", "No"],
-                message: ['Certificate field could be only "Yes" or "No"!'],
+                values: ["Yes", "No"],
+                message: 'Certificate field could be only "Yes" or "No"!',
             },
         },
         author: { type: Types.ObjectId, ref: "User" },
