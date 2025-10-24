@@ -6,7 +6,8 @@ import { artService } from "../services/index.js";
 const artController = Router();
 
 artController.get("/", async (req, res) => {
-    res.render("art/gallery");
+    const arts = await artService.getAll();
+    res.render("art/gallery", { arts });
 });
 
 artController.get("/create", isAuth, (req, res) => {
