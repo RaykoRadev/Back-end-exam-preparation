@@ -3,6 +3,6 @@ export default {
         this.pageTitle = title;
     },
     getTitle() {
-        return this.pageTitle || "ToDo change the Title";
+        return this.pageTitle || "Art Gallery";
     },
 };
