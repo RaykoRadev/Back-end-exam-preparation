@@ -1,3 +1,25 @@
+[x] Install dependencies `npm i`
+
+-   [x] Remove old resources and add new resources `/src/public`
+-   [x] Add html files to the views folder
+-   [ ] Rename database name
+-   [ ] Replace layout
+    -   [ ] Dynamic title
+    -   [ ] Fix resource routes
+    -   [ ] Error notification
+    -   [ ] Body
+    -   [ ] Dynamic Navigation
+-   [ ] Replace home page
+-   [ ] Modify navigation links
+-   [ ] Modify User model
+-   [ ] Modify login and register controller
+-   [ ] Modify login and register service
+-   [ ] Modify token generation
+-   [ ] Modify login and register error handlers
+-   [ ] Replace login page
+-   [ ] Replace register page
+-   [ ] Replace 404 page
+
 match: [
 /^https?:\/\//,
 "Animal's imageUrl has to be start with http://... or https://...!",
