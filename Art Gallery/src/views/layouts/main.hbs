@@ -3,49 +3,52 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{getTitle}}</title>
-    <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- Do not forget to change the path to the css file -->
+    <link rel="stylesheet" href="/style/css/style.css">
 </head>
 
 <body>
+    <div id="box">
 
-    {{#if error}}
-    <div>
-        <div class="errorContainer">
+        {{#if error}}
+        <div class="error-box">
             <p>{{error}}</p>
         </div>
-    </div>
-    {{/if}}
-
-    <div class="navigation">
+        {{/if}}
         <nav>
-            <img src="/images/logo.png">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#">All Courses</a></li>
 
+            <!-- Do not forget to change the path to the image -->
+            <img src="/style/img/art-logo.png" alt="logo">
+            <a href="/">ArtGallery</a>
+
+            <ul class="menu">
+                <li><a href="/art">Gallery</a></li>
                 {{#if isAuthenticated}}
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Create Course Offers</a></li>
+                <!-- Logged users -->
+                <li><a href="/art/create">Create Publication</a></li>
+                <li><a href="/art/profile">Profile</a></li>
                 <li><a href="/users/logout">Logout</a></li>
                 {{else}}
+                <!-- Guest users -->
                 <li><a href="/users/login">Login</a></li>
                 <li><a href="/users/register">Register</a></li>
                 {{/if}}
-
             </ul>
+
         </nav>
+
+        <main>
+
+            {{{body}}}
+
+        </main>
+
+        <footer>
+            © Js Back-End Retake Exam 2021
+        </footer>
     </div>
-
-    <main>
-
-        {{{body}}}
-
-    </main>
-
-    <footer>Back-End 2023</footer>
 </body>
 
 </html>

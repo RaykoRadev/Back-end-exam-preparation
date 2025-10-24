@@ -7,8 +7,7 @@ export async function register(userData) {
     if (userData.password !== userData.rePassword) {
         throw new Error("Password missmatch!");
     }
-    //todo check existing user (email / username) acording instructions
-    const user = await User.findOne({ email: userData.email });
+    const user = await User.findOne({ username: userData.username });
 
     if (user) {
         throw new Error("User already exists!");
@@ -20,18 +19,15 @@ export async function register(userData) {
 }
 
 export async function login(userData) {
-    //todo check existing user (email / username) and error messages acording instructions
-    const user = await User.findOne({ email: userData.email });
+    const user = await User.findOne({ username: userData.username });
 
     if (!user) {
-        //todo check existing user (email / username) and error messages acording instructions
-        throw new Error("Invalid email/username or password!");
+        throw new Error("Invalid username or password!");
     }
 
     const isMatch = await bcrypt.compare(userData.password, user.password);
     if (!isMatch) {
-        //todo check existing user (email / username) and error messages acording instructions
-        throw new Error("Invalid email/username or password!");
+        throw new Error("Invalid username or password!");
     }
 
     const token = generateAuthToken(user);

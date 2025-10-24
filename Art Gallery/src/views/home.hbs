@@ -1,47 +1,41 @@
 {{setTitle 'Home Page'}}
 
-<div class="container">
-    <div class="course-message">
-        <h1 id="site-title">Course Book</h1>
-        <h2 id="site-mid-title">Show your opportunities!</h2>
-    </div>
+<section id="home-page">
+    <article class="auto-content">
+        <h1>NEWS OF OUR</h1>
+        <h2>ART GALLERY</h2>
+    </article>
+</section>
 
-    <div class="last-course">
-        <div class="info">
-            <h2 class="title">Spanish 1-4: Beginner, Elementary, Intermediate and Advanced</h2>
-            <h4 class="genre">Type: Language</h4>
-            <h4 class="certificate">Certificate: Yes</h4>
-            <h4 class="price">Price: €15</h4>
-            <div class="learn-more">
-                <a href="#">Learn More...</a>
-            </div>
-        </div>
+<section id="home-page-content">
+    <h1>Statistics of shared publication</h1>
+    <article class="home-page-content-publications">
 
-        <div class="info">
-            <h2 class="title">Classroom Management Essentials</h2>
-            <h4 class="genre">Type: Management</h4>
-            <h4 class="certificate">Certificate: Yes</h4>
-            <h4 class="price">Price: €25</h4>
-            <div class="learn-more">
-                <a href="#">Learn More...</a>
-            </div>
-        </div>
+        <!--If there are publications in the database, show the following view for each created publication-->
+        <article class="content-publication">
+            <h1>Title: Spring in the garden</h1>
 
-        <div class="info">
-            <h2 class="title">Art History Prehistory to the Renaissance</h2>
-            <h4 class="genre">Type: Art History</h4>
-            <h4 class="certificate">Certificate: Yes</h4>
-            <h4 class="price">Price: €17</h4>
-            <div class="learn-more">
-                <a href="#">Learn More...</a>
-            </div>
-        </div>
+            <!--If no one has shared the post yet, the number should be zero -->
+            <p>Number of people shared the publication: 0</p>
+            <a href="#" class="image-details">View publication</a>
+        </article>
 
+        <article class="content-publication">
+            <h1>Title: Painting is everything</h1>
 
-    </div>
+            <!--If no one has shared the post yet, the number should be zero -->
+            <!--<p>Number of people shared the publication: 0</p>-->
 
-    <!-- If there are still no course posts on the database -->
-    <!-- <article class="not-available-course">
-                    <h1>No course created yet.</h1>
-                </article> -->
-</div>
+            <!--Otherwise, show the number -->
+            <p>Number of people shared the publication: 2</p>
+            <a href="#" class="image-details">View publication</a>
+        </article>
+
+        <!--If there are no publications yet, show:-->
+        <!--<article class="no-publication">
+                        <h1>There are no publications yet.</h1>
+                        <a href="#" class="view-gallery">View Gallery</a>
+                    </article>-->
+    </article>
+
+</section>

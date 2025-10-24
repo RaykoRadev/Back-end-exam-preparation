@@ -38,7 +38,6 @@ app.use(authMiddleware);
 app.use(routes);
 
 app.use(globalErrorHandler);
-//todo check the corect port for the server
 app.listen(
     3000,
     console.log("Server is listening on http://localhost:3000...")

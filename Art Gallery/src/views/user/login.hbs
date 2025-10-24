@@ -1,13 +1,38 @@
 {{setTitle 'Login Page'}}
 
-<div class="login-box">
-    <h1>Login</h1>
-    <form method="post">
-        <label>Email</label>
-        <input type="text" placeholder="Email.." name="email" , value="{{user.email}}">
-        <label>Password</label>
-        <input type="password" placeholder="Password.." name="password">
-        <input type="submit" value="Submit">
-    </form>
-    <p>Not have an account? <a href="/users/login">Register here</a></p>
-</div>
+<section id="login-container">
+    <div class="container">
+        <!-- Do not forget to change the path to the image -->
+        <img src="/style/img/slider.jpg" alt="image" />
+
+        <form method="post" class="container-text">
+            <h2>Login</h2>
+            <p>Welcome, see the new masterpieces!</p>
+
+            <label for="username">Username:</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="ivan_00"
+                name="username"
+                value="{{user.username}}"
+            />
+
+            <label for="password">Password:</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="*****"
+                name="password"
+            />
+
+            <button class="login-btn">Login</button>
+            <div class="card-no-account">
+                <p>
+                    Don't have an account?
+                    <a href="/users/register">Sign up</a>.
+                </p>
+            </div>
+        </form>
+    </div>
+</section>

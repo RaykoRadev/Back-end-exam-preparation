@@ -1,17 +1,54 @@
 {{setTitle 'Register Page'}}
 
-<div class="register-box">
-    <h1>Register</h1>
-    <form method="post">
-        <label>Username</label>
-        <input type="text" placeholder="Username.." name="username" value="{{user.username}}">
-        <label>Email</label>
-        <input type="text" placeholder="Email.." name="email" value="{{user.email}}">
-        <label>Password</label>
-        <input type="password" placeholder="Password.." name="password">
-        <label>Confirm Password</label>
-        <input type="password" placeholder="Confirm Password.." name="rePassword">
-        <input type="submit" value="Submit">
-    </form>
-    <p>Already have an account? <a href="/users/login">Login here</a></p>
-</div>
+<section id="register-container">
+    <div class="register-container-info">
+        <!-- Do not forget to change the path to the image -->
+        <img src="/style/img/slider.jpg" alt="image" />
+
+        <form method="post" class="container-text">
+            <h2>Register</h2>
+            <p>Register to get ideas and view the latest masterpieces.</p>
+
+            <label for="username">Username:</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="ivan_00"
+                name="username"
+                value="{{user.username}}"
+            />
+
+            <label for="password">Password:</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="*****"
+                name="password"
+            />
+
+            <label for="re-password">Repeat password:</label>
+            <input
+                type="password"
+                id="re-password"
+                placeholder="*****"
+                name="rePassword"
+            />
+
+            <label for="address">Address:</label>
+            <input
+                type="text"
+                id="address"
+                placeholder="2572 Orphan Road"
+                name="address"
+                value="{{user.address}}"
+            />
+
+            <button class="register-btn">Register</button>
+            <div class="card-no-account">
+                <p>
+                    Already have an account?<a href="/users/login"> Sign in</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</section>

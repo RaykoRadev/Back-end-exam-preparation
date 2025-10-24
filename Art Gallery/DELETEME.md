@@ -2,23 +2,23 @@
 
 -   [x] Remove old resources and add new resources `/src/public`
 -   [x] Add html files to the views folder
--   [ ] Rename database name
--   [ ] Replace layout
-    -   [ ] Dynamic title
-    -   [ ] Fix resource routes
-    -   [ ] Error notification
-    -   [ ] Body
-    -   [ ] Dynamic Navigation
--   [ ] Replace home page
--   [ ] Modify navigation links
--   [ ] Modify User model
--   [ ] Modify login and register controller
--   [ ] Modify login and register service
--   [ ] Modify token generation
--   [ ] Modify login and register error handlers
--   [ ] Replace login page
--   [ ] Replace register page
--   [ ] Replace 404 page
+-   [x] Rename database name
+-   [x] Replace layout
+    -   [x] Dynamic title
+    -   [x] Fix resource routes
+    -   [x] Error notification
+    -   [x] Body
+    -   [x] Dynamic Navigation
+-   [x] Replace home page
+-   [x] Modify navigation links
+-   [x] Modify User model
+-   [x] Modify login and register controller
+-   [x] Modify login and register service
+-   [x] Modify token generation
+-   [x] Modify login and register error handlers
+-   [x] Replace login page
+-   [x] Replace register page
+-   [x] Replace 404 page
 
 match: [
 /^https?:\/\//,
