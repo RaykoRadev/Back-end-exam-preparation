@@ -68,4 +68,11 @@ artController.post("/edit/:artId", isAuth, async (req, res) => {
     }
 });
 
+artController.get("/delete/:artId", isAuth, async (req, res) => {
+    const artId = req.params.artId;
+    const userId = req.user.id;
+    await artService.deleteF(artId, userId);
+    res.redirect("/art");
+});
+
 export default artController;
